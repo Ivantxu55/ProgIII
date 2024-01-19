@@ -18,13 +18,15 @@ public class TestParseCSV {
 	private static ArrayList<Concierto> conciertos;
 	private static ArrayList<Festival> festivales;
 
+	/*
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		conciertos = ParseCSV.leerConciertos("resources/CSV/Conciertos.csv");
 		festivales = ParseCSV.leerFestivales("resources/CSV/Festivales.csv", conciertos);
 		
 	}
-
+	*/
+	
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 	}

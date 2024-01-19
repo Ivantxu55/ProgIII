@@ -145,10 +145,4 @@ public class VentanaFestivales1 extends JFrame{
 		final Color color = Color.getHSBColor(hue, saturation, luminance);
 		return color;
 	}
-	
-	public static void main(String[] args) {
-		ArrayList<Concierto> c = ParseCSV.leerConciertos("resources/CSV/Conciertos.csv");
-		ArrayList<Festival> f = ParseCSV.leerFestivales("resources/CSV/Festivales.csv", c);
-		VentanaFestivales1 v = new VentanaFestivales1(f);
-	}
 }
