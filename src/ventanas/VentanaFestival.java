@@ -55,8 +55,7 @@ public class VentanaFestival extends JFrame {
 
 	private JTable tablaFestivales;
 	private JMenuBar menuFestival;
-	private JMenu filtros;
-	private JMenuItem nomFest, fechFest, artFest, genFest;
+
 	private JTextField txtFiltro;
 
 	protected JButton seguirBoton;
@@ -73,20 +72,13 @@ public class VentanaFestival extends JFrame {
 
 		menuFestival = new JMenuBar();
 		this.setJMenuBar(menuFestival);
-		filtros = new JMenu("Filtros");
 
-		JPanel panelVacio = new JPanel();
 		txtFiltro = new JTextField();
 
 		JPanel buscador = new JPanel(new GridBagLayout());
 		
 		JLabel buscadorLabel = new JLabel("Filtrar por nombre:    ");
-		menuFestival.add(filtros);
-		menuFestival.add(panelVacio);
-		panelVacio.setBounds(0, 0, 220, buscadorLabel.getHeight());
-		panelVacio.setBorder(new EmptyBorder(10, 10, 10, 300));
-		panelVacio.setBackground(this.getBackground());
-		menuFestival.add(buscador);
+		menuFestival.add(new JLabel(new ImageIcon("img/BannerFestivales.png")));
 
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridx = 1;
@@ -110,25 +102,12 @@ public class VentanaFestival extends JFrame {
 
 		buscador.add(txtFiltro, gbc);
 
-		nomFest = new JMenuItem("Nombre");
-		fechFest = new JMenu("Fecha");
-		artFest = new JMenuItem("Artista");
-		genFest = new JMenu("Género");
-		filtros.add(nomFest);
-		filtros.add(fechFest);
+
 
 		JCalendar calendar = new JCalendar();
 		JPanel data = new JPanel();
 		data.add(calendar);
-		fechFest.add(data);
 
-		filtros.add(artFest);
-		filtros.add(genFest);
-		JCheckBoxMenuItem i;
-		for (Genero genero : Genero.values()) {
-			i = new JCheckBoxMenuItem(genero.name());
-			genFest.add(i);
-		}
 
 		seguirBoton = new JButton("Seguir");
 		JPanel panelBotonesFinal = new JPanel();
@@ -239,7 +218,7 @@ public class VentanaFestival extends JFrame {
 		this.setTitle("Ventana de festivales");
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-		this.setSize(800, 600);
+		this.setSize(1000, 600);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}
