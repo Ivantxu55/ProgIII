@@ -18,6 +18,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -43,7 +45,7 @@ public class VentanaMenuPrincipal {
 	
 	private JButton botonConcierto = new JButton("CONCIERTOS");
 	private JButton botonFestival = new JButton("FESTIVALES");
-	private JButton botonLogo = new JButton(new ImageIcon("img/logo - copia.png"));
+	private JLabel labelLogo = new JLabel(new ImageIcon("img/logo - copia.png"));
 	
 	private JPanel panelMenuBar = new JPanel();
 	private JPanel panelAnuncios = new JPanel();
@@ -51,9 +53,9 @@ public class VentanaMenuPrincipal {
 	private JMenuBar menuBar1 = new JMenuBar();
 	private JMenuBar menuBar2 = new JMenuBar();
 	
-	protected JLabel promo1 = new JLabel("Esto es una imagen1");
-	protected JLabel promo2 = new JLabel("Esto es una imagen2");
-	protected JLabel promo3 = new JLabel("Esto es una imagen3");
+	protected JLabel promo1;
+	protected JLabel promo2;
+	protected JLabel promo3;
 	private JLabel espacioB0 = new JLabel("                                               ");
 	private JLabel espacioB1 = new JLabel("                                               ");
 	private JLabel espacioB2 = new JLabel("                                               ");
@@ -64,8 +66,19 @@ public class VentanaMenuPrincipal {
 		
 		logger.info(String.format("Accediendo a la ventana3."));
 		
+		//Lista de imagenes posibles
+		List<String> imgs = new ArrayList<>(Arrays.asList(	"img/A3_Cartel_FESTIVAL_DE_JAZZ-scaled.png", 
+															"img/Cartel-Festival-Flamenco-Benicassim-2023-707x1024.png", 
+															"img/FESTIVAL-SONICA-2022.png",
+															"img/cartel-coachella-2024.png",
+															"img/lollapalooza-lineup-.png"));
+		Collections.shuffle(imgs);
+		promo1 = new JLabel(new ImageIcon(imgs.get(0)));
+		promo2 = new JLabel(new ImageIcon(imgs.get(1)));
+		promo3 = new JLabel(new ImageIcon(imgs.get(2)));
+		
 		JFrame frame = new JFrame("VentanaMenuPrincipal");
-		frame.setSize((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth()/2, (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight()/2);
+		frame.setSize(900, 600);
 		ArrayList<Concierto> conciertos = ParseCSV.leerConciertos("resources/CSV/Conciertos.csv");
 		ArrayList<Festival> festivales = ParseCSV.leerFestivales("resources/CSV/Festivales.csv", conciertos);
 	
@@ -81,7 +94,7 @@ public class VentanaMenuPrincipal {
 		menuBar2.add(espacioB1);
 		menuBar2.add(botonFestival);
 		menuBar2.add(espacioB2);
-		menuBar2.add(botonLogo);
+		menuBar2.add(labelLogo);
 
 		//Se distribuyen los anuncios 
 		panelAnuncios.setLayout(new GridLayout(1,3));
