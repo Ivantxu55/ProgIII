@@ -10,29 +10,26 @@ import javax.swing.*;
 import bd.DBManager;
 import datos.*;
 
-public class Ventana6 extends JFrame{
+public class VentanaPago extends JFrame{
 	
 	private static final long serialVersionUID = 1L;
 
-	public Ventana6(String nom, Tipo tipo) {
+	public VentanaPago(String nom, Tipo tipo) {
 		
 		// Configuración de la ventana.
 		DBManager.abrirConexion();
 		ArrayList<Concierto> c = DBManager.getConciertos();
 		ArrayList<Festival> f = DBManager.getFestivales();
-		
 
 		setTitle("Pagar");
 		setSize(750, 300);
 		setLocation(450, 250);;
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
 		
 		// Creación de contenedores de la ventana y su configuración.
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
-		
 		
 		JTextArea area = new JTextArea();
 		area.setEditable(false);

@@ -6,11 +6,11 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-public class Ventana8 extends JFrame{
+public class VentanaAgradecimiento extends JFrame{
 	
 	private static final long serialVersionUID = 1L;
 
-	public Ventana8() {
+	public VentanaAgradecimiento() {
 		
 		// Configuración de la ventana.
 		setTitle("Agradecimiento");
@@ -102,7 +102,7 @@ public class Ventana8 extends JFrame{
 	}
 	
 	public static void main(String[] args) {
-		Ventana8 v = new Ventana8();
+		VentanaAgradecimiento v = new VentanaAgradecimiento();
 	}
 	
 }

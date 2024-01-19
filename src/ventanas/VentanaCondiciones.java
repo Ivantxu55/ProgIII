@@ -68,7 +68,7 @@ public class VentanaCondiciones extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Ventana8 v = new Ventana8();
+				VentanaAgradecimiento v = new VentanaAgradecimiento();
 				dispose();
 				
 			}

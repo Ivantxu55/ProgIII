@@ -46,14 +46,13 @@ import modelos.ModeloTablaFestivalCliente;
 public class VentanaConciertos  extends JFrame {
 	private static final long serialVersionUID = 1L;
 
-	protected boolean esConcieto = true;
 	private JTable tablaConciertos;
 	private JMenuBar menuConcierto;
 	private JMenu filtros;
 	private JMenuItem nomCon, fechCon, artCon, genCon;
 	private JTextField txtFiltro;
 
-	protected JButton seguirBoton, editarBoton, PromocionarBoton;
+	protected JButton seguirBoton;
 	
 	protected static final Logger logger = Logger.getLogger(VentanaFestival.class.getName());
 	private Concierto elegido;
@@ -139,20 +138,13 @@ public class VentanaConciertos  extends JFrame {
 		}
 
 		seguirBoton = new JButton("Seguir");
-		editarBoton = new JButton("Editar");
-		PromocionarBoton = new JButton("Promocionar");
 		JPanel panelBotonesFinal = new JPanel();
 		
 		ModeloTablaConciertoCliente tablamodelo = new ModeloTablaConciertoCliente(conciertos);
 		tablaConciertos = new JTable(tablamodelo);
-
-		//panelBotonesFinal.add(editarBoton);
-		editarBoton.setEnabled(false);
-		panelBotonesFinal.add(PromocionarBoton);
-
-		PromocionarBoton.setEnabled(false);
-		// PromocionarBoton.setVisible(false);
+		
 		panelBotonesFinal.add(seguirBoton);
+		
 		tablaConciertos.setRowSelectionAllowed(true);
 
 		ActionListener butonSeguirListener = new ActionListener() {
@@ -166,7 +158,7 @@ public class VentanaConciertos  extends JFrame {
 					if (elegido!= null) {
 						//TODO
 						//CAMBIARLO CUANDO CONVENGA LA LLAMADA A SIGUIENTE VENTANA
-						Ventana6 v = new Ventana6(elegido.getNombre(), Tipo.Concierto);
+						VentanaPago v = new VentanaPago(elegido.getNombre(), Tipo.Concierto);
 						dispose();
 					} else {
 						JOptionPane.showMessageDialog(null, "Seleccione un concierto para poder continuar.");
@@ -177,91 +169,6 @@ public class VentanaConciertos  extends JFrame {
 
 		seguirBoton.addActionListener(butonSeguirListener);
 
-		ActionListener butonPromocionarListener = new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				if (esConcieto == true) {
-					// Prommocionar concierto
-					tablaConciertos.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-
-						@Override
-						public void valueChanged(ListSelectionEvent e) {
-							
-							int filaSeleccionada = tablaConciertos.getSelectedRow();
-							
-							elegido = conciertos.get(filaSeleccionada);
-							System.out.println(elegido);
-							
-						}
-					});
-					
-					if(elegido != null) { 
-						
-						VentanaMenuPrincipal v = new VentanaMenuPrincipal();
-						
-						if (v.promo1.getText().equals("Esto es una imagen1") == true) {
-							v.promo1.setText("img/FESTIVAL-SONICA-2022.png");
-							v.promo1.setIcon(new ImageIcon("img/FESTIVAL-SONICA-2022.png"));
-							
-						} else if (v.promo2.getText().equals("Esto es una imagen2") == true) {
-							v.promo2.setIcon(new ImageIcon("img/RUFWFZVEM3CX4PDVHIUCNM7ZE4.png"));
-							
-						} else if (v.promo3.getText().equals("Esto es una imagen3") == true) {
-							v.promo3.setIcon(new ImageIcon("img/A3_Cartel_FESTIVAL_DE_JAZZ-scaled.png"));
-							
-						} else {
-							
-							ImageIcon img = (ImageIcon) v.promo1.getIcon();
-							v.promo1.setIcon(new ImageIcon("img/Cartel-Festival-Flamenco-Benicassim-2023-707x1024.png"));
-							ImageIcon img2 = (ImageIcon) v.promo2.getIcon();
-							v.promo2.setIcon(img);
-							v.promo3.setIcon(img2);
-							
-						}
-						dispose();
-						
-					} else {
-						JOptionPane.showMessageDialog(null, "Seleccione un concierto para promocionarlo.");
-					}
-					
-				} else if (esConcieto == false) {
-					JOptionPane.showMessageDialog(null, "Esa eleccion no es correcta. Seleccione un concierto");
-			       
-				}
-			}
-		};
-
-		// Agregar ListSelectionListener solo si la tablaFestivales no es nula
-		
-		PromocionarBoton.addActionListener(butonPromocionarListener);
-
-		ActionListener butonEditarListener = new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-		        int filaSeleccionada = tablaConciertos.getSelectedRow();
-		        if (filaSeleccionada != -1) {
-		            // Obtener el modelo de la tabla
-		            ModeloTablaFestivalCliente modelo = (ModeloTablaFestivalCliente) tablaConciertos.getModel();
-
-		            // Obtener los datos de la fila seleccionada
-		            Festival festivalSeleccionado = modelo.getFestival(filaSeleccionada);
-
-		            // Realizar modificaciones en los datos
-		            // Por ejemplo, cambiar el nombre del festival
-		            festivalSeleccionado.setNombre("Nuevo Nombre");
-
-		            // Actualizar el modelo de la tabla con los datos modificados
-		            modelo.fireTableDataChanged();
-		            
-		        }
-			}
-		};
-
-		editarBoton.addActionListener(butonEditarListener);
 		JPanel panelInicial = new JPanel();
 
 		gbc.gridx = 1;
@@ -276,24 +183,9 @@ public class VentanaConciertos  extends JFrame {
 		p.add(panelInicial);
 		p.add(panelInicial, gbc);
 
-
-//		ModeloTablaFestivalCliente tablamodelo = new ModeloTablaFestivalCliente(festivales);
 		tablaConciertos = new JTable(tablamodelo);
 		TableCellRenderer cellRenderer = (table, value, isSelected, hasFocus, row, column) -> {
 			JLabel result = new JLabel(value.toString());
-
-			// Si el valor es de tipo Editorial: se renderiza con la imagen centrada
-			/*
-			 * if (value instanceof Genero) { Genero e = (Genero) value;
-			 * 
-			 * result.setText(""); result.setToolTipText(e.toString());
-			 * result.setHorizontalAlignment(JLabel.CENTER);
-			 * 
-			 * switch (e) { case HIP_HOP: result.setIcon(new ImageIcon("")); break; case
-			 * BLUES: result.setIcon(new ImageIcon("")); break; default: }
-			 * 
-			 * }
-			 */
 
 			if (row % 2 == 0) {
 				result.setBackground(new Color(250, 249, 249));
@@ -333,13 +225,11 @@ public class VentanaConciertos  extends JFrame {
 		gbc.gridwidth = 1;
 		gbc.gridheight = 2;
 		gbc.fill = GridBagConstraints.BOTH;
-		// gbc.anchor= GridBagConstraints.CENTER;
 		gbc.weightx = 0.1;
 		gbc.weighty = 1;
 		gbc.insets = new Insets(0, 0, 0, 0);
 
 		p.add(panelTablaRight);
-		// panelTablaRight.setBackground(Color.RED);
 		p.add(panelTablaRight, gbc);
 
 		gbc.gridx = 2;
@@ -347,7 +237,6 @@ public class VentanaConciertos  extends JFrame {
 		gbc.gridwidth = 2;
 		gbc.gridheight = 1;
 		gbc.fill = GridBagConstraints.NONE;
-		// gbc.anchor= GridBagConstraints.LINE_START;
 		gbc.weightx = 0.0;
 		gbc.weighty = 0.2;
 		gbc.insets = new Insets(0, 0, 0, 0);
