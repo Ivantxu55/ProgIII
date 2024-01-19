@@ -68,7 +68,7 @@ public class ModeloTablaFestivalCliente extends AbstractTableModel {
 		case 4:
 			return festival.getDescripcion();
 		case 5:
-			return festival.getPrecio() + "€";
+			return festival.getPrecio();
 		case 6:
 			return festival.getGeneros();
 		default:

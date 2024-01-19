@@ -66,7 +66,7 @@ public class ModeloTablaConciertoCliente extends AbstractTableModel {
 		case 4:
 			return Concierto.getDescripcion();
 		case 5:
-			return Concierto.getPrecio() + " €";
+			return Concierto.getPrecio();
 		case 6:
 			return Concierto.getAforo();
 		default:

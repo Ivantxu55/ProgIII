@@ -1,152 +1,157 @@
-/*
 package ventanas;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.Insets;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
+import java.awt.Color;
+import java.awt.GridLayout;
+import java.util.ArrayList;
+
+import java.util.List;
+import java.util.Random;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.plaf.basic.BasicOptionPaneUI.ButtonActionListener;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.SwingUtilities;
+import javax.swing.table.TableCellRenderer;
 
-import files.InglesProperties;
-public class VentanaInicial {
+import datos.Concierto;
+import datos.Festival;
+import datos.Genero;
+import modelos.ModeloTablaConciertoCliente;
+import modelos.ModeloTablaFestivalCliente;
+import datos.ParseCSV;
+
+
+
+
+public class VentanaInicial extends JFrame{
 	
-	public VentanaInicial(){
-	//creation of the window
-	JFrame frame = new JFrame("Ventana 1");
-	frame.setSize((int)Toolkit. getDefaultToolkit(). getScreenSize().getWidth()/2, (int)Toolkit. getDefaultToolkit(). getScreenSize().getHeight()/2);
+	private static final long serialVersionUID = 1L;
+
+
 	
-	//creation of the panel
-	JPanel panelGeneral = new JPanel();
-	frame.add(panelGeneral);
-	panelGeneral.setLayout(new BorderLayout());
-	JPanel panelBotones = new JPanel();
-	
-	panelBotones.setLayout(new GridBagLayout());
-	
-	//Making of the components inside of the window 
-			JMenuBar menuBar= new JMenuBar();
-			JMenu menuIdiomas= new JMenu("Menu de idiomas");
-			
-			JPanel panelPane= new JPanel(new BorderLayout(0,3));
-			
-			JLabel avisoError = new JLabel("Contraseña incorrecta", SwingConstants.CENTER);
-			avisoError.setForeground(frame.getBackground());
-			JButton buttonseguirPane = new JButton("Seguir");
-			//JPasswordField pwf= new JPasswordField(10);
-			JTextField pwf= new JTextField(10);
-			
-			panelPane.add(buttonseguirPane, BorderLayout.SOUTH);
-			panelPane.add(avisoError, BorderLayout.CENTER);
-			panelPane.add(pwf, BorderLayout.NORTH);
-	
-			Object[] componentsoptionPaneVentana2 = {panelPane};
-			
-	//Creating the Action Listeners
-	
-	
-	ActionListener actionButtonAdministrador = new ActionListener(){
-		public void actionPerformed(ActionEvent e) {
-			JOptionPane.showOptionDialog(frame, "Insertar contraseña:", "Ventana 2", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, componentsoptionPaneVentana2, null);	
-		}};	
+	public VentanaInicial(ArrayList<Concierto> conciertos, ArrayList<Festival> festivales) {
 		
-	ActionListener actionButtonCliente = new ActionListener(){
-	
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			Ventana_3 v = new Ventana_3();
-			frame.dispose();
-			//Añadir ventana de anuncios	
-		}};
-		ActionListener botonSeguirPaneAction = new ActionListener() {
-	
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				if(pwf.getText().toString().equals("11")) {
-				Ventana_3 v = new Ventana_3();
-				v.esAdmin= true;
-				frame.dispose();
-				//Pasar a la siguente ventana(La ventana de concierto administrador)
-				}else {
-					avisoError.setForeground(Color.DARK_GRAY);
-				}}};
-			buttonseguirPane.addActionListener(botonSeguirPaneAction);
-	
-	//Creation of buttons and assigning listeners to them 
-	JButton buttonAdministrador = new JButton("Administrador");
-	buttonAdministrador.addActionListener(actionButtonAdministrador);
-	JButton buttonCliente = new JButton("     Cliente     ");
-	
-	GridBagConstraints gbc = new GridBagConstraints();
-	gbc.gridx=1;
-	gbc.gridy=3;
-	gbc.gridwidth=  1;
-	gbc.gridheight= 1;
-	gbc.anchor = GridBagConstraints.CENTER;
-	gbc.weightx= 0.5;
-	gbc.weighty= 0;
-	
-	panelBotones.add(buttonCliente, gbc);
-	
-	gbc.gridx=1;
-	gbc.gridy= 4;
-	gbc.gridwidth= 1;
-	gbc.gridheight=1;
-	//gbc.fill=GridBagConstraints.NORTH;
-	
-	gbc.insets= new Insets(20,0,0,0);
-	gbc.anchor = GridBagConstraints.CENTER;
-	gbc.weightx= 0.5;
-	gbc.weighty= 0;
-	panelBotones.add(buttonAdministrador, gbc);
-	
-	buttonAdministrador.addActionListener(actionButtonAdministrador);
-	buttonCliente.addActionListener(actionButtonCliente);
-	
-	//Creation of the items inside of the menu
-	JMenuItem menuItemIngles= new JMenuItem("English");
-	
-	JMenuItem menuItemEuskera= new JMenuItem("Euskera");
-	JMenuItem menuItemCastellano= new JMenuItem("Castellano");
-	
-	//Adding the items inside the menu
-	menuIdiomas.add(menuItemIngles);
-	menuIdiomas.add(menuItemEuskera);
-	menuIdiomas.add(menuItemCastellano);
-	
-	//adding the menu to menubar
-	menuBar.add(menuIdiomas);
-	
-	//adding menubar to panel
-	panelGeneral.add(menuBar, BorderLayout.PAGE_START);
-	panelGeneral.add(panelBotones, BorderLayout.CENTER );
-	
-	//Setting the basics in the window
-	//JFrame.setDefaultLookAndFeelDecorated(true);
-	
-	frame.setLocationRelativeTo(null);
-	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	frame.setVisible(true);
-	frame.setResizable(false);
-	
-	}	
-	
+        JFrame frame = new JFrame("Conciertos y Festivales");
+
+        // Configuración del frame
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setTitle("Conciertos y Festivales");
+        frame.setSize(900, 300);
+
+        frame.setLayout(new GridLayout(2,1));
+
+        // Añadir filas de datos
+
+		
+		
+		ModeloTablaFestivalCliente modeloFest = new ModeloTablaFestivalCliente(festivales);
+//		
+        modeloFest.setFestivales(festivales);
+		ModeloTablaConciertoCliente modeloConcierto = new ModeloTablaConciertoCliente(conciertos);
+		modeloConcierto.setConciertos(conciertos);
+		
+        
+        // Crear la tabla con el modelo de datos
+        JTable tabla = new JTable(modeloConcierto);
+        JTable tablaF = new JTable(modeloFest);
+       
+
+        // Agregar la tabla a un JScrollPane
+        JScrollPane scrollPane = new JScrollPane(tabla);
+        JScrollPane scrollPaneFest = new JScrollPane(tablaF);
+
+        // Agregar el JScrollPane al frame
+        frame.add(scrollPane);
+        frame.add(scrollPaneFest);
+
+        // Hacer visible el frame
+        frame.setVisible(true);
+        frame.setResizable(true);
+        
+        TableCellRenderer cellConcierto = (table, value, isSelected, hasFocus, row, column) -> {
+			JLabel result = new JLabel(value.toString());
+			
+			result.setBackground(table.getBackground());
+			result.setForeground(table.getForeground());
+			result.setHorizontalAlignment(JLabel.CENTER);
+			Genero g = Genero.valueOf(table.getValueAt(row, 1).toString());
+			result.setBackground(g.getColor());
+
+			
+    	    if (isSelected) {
+                result.setBackground(g.getColor().darker());
+            }
+			
+        	if(table.equals(tabla)) {
+        			
+        			if (value instanceof Float) {
+                		result.setHorizontalAlignment(JLabel.LEFT);
+                		result.setText(value.toString() + "€");
+                	
+        		}
+        		
+            	
+            	
+        	}
+
+        	
+        	result.setOpaque(true);
+        	return result;
+        	
+        };
+        
+        TableCellRenderer cellFestival = (table, value, isSelected, hasFocus, row, column) -> {
+			JLabel result = new JLabel(value.toString());
+			
+			result.setBackground(table.getBackground());
+			result.setForeground(table.getForeground());
+			result.setHorizontalAlignment(JLabel.CENTER);
+			
+
+			
+        	if(table.equals(tablaF)) {
+    				result.setBackground(randColor());
+    			
+    			if (value instanceof Float) {
+            		result.setHorizontalAlignment(JLabel.LEFT);
+            		result.setText(value.toString() + "€");
+            	
+    		}
+    			if(isSelected) {
+    				result.setBackground(randColor().darker());
+    			}
+    		
+        	
+        	
+    	}
+
+
+        	
+        	result.setOpaque(true);
+        	return result;
+        	
+        };
+        tablaF.setDefaultRenderer(Object.class, cellFestival);
+		
+        tabla.setDefaultRenderer(Object.class, cellConcierto);
+        
+	}
+	public static Color randColor() {
+		final float hue = new Random().nextFloat();
+		// Saturation between 0.1 and 0.3
+		final float saturation = (new Random().nextInt(2000) + 1000) / 10000f;
+		final float luminance = 0.9f;
+		final Color color = Color.getHSBColor(hue, saturation, luminance);
+		return color;
+	}
+
+	public static void main(String[] args) {
+		ArrayList<Concierto> c = ParseCSV.leerConciertos("resources/CSV/Conciertos.csv");
+		ArrayList<Festival> f = ParseCSV.leerFestivales("resources/CSV/Festivales.csv", c);
+		
+		SwingUtilities.invokeLater(() -> new VentanaInicial(c, f));
+	}
+
 }
-*/
