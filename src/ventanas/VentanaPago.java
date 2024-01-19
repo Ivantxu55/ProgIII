@@ -14,13 +14,9 @@ public class VentanaPago extends JFrame{
 	
 	private static final long serialVersionUID = 1L;
 
-	public VentanaPago(String nom, Tipo tipo) {
+	public VentanaPago(Object elegido) {
 		
 		// Configuración de la ventana.
-		DBManager.abrirConexion();
-		ArrayList<Concierto> c = DBManager.getConciertos();
-		ArrayList<Festival> f = DBManager.getFestivales();
-
 		setTitle("Pagar");
 		setSize(750, 300);
 		setLocation(450, 250);;
@@ -37,15 +33,13 @@ public class VentanaPago extends JFrame{
 		area.setLineWrap(true);
 		JLabel lTotal = new JLabel("");
 
-		switch(tipo) {
-		case Concierto: Concierto elegidoC = ParseCSV.encontrarConciertoPorNombre(c, nom);
-						area.setText(elegidoC.toStringPers());
-						lTotal.setText("Total:" + elegidoC.getPrecio() + "€");
-		
-		case Festival: Festival elegidoF = ParseCSV.encontrarFestivalPorNombre(f, nom);
-						area.setText(elegidoF.toStringPers());
-						lTotal.setText("Total:" + elegidoF.getPrecio() + "€");
-	}
+		if(elegido instanceof Concierto) {
+			area.setText(((Concierto) elegido).toStringPers());
+			lTotal.setText("Total:" + ((Concierto) elegido).getPrecio() + "€");
+		}else if(elegido instanceof Festival) {
+			area.setText(((Festival) elegido).toStringPers());
+			lTotal.setText("Total:" + ((Festival) elegido).getPrecio() + "€");
+		}
 		
 		JLabel lMetodoPago = new JLabel("Métodos de pago: ");
 		JComboBox<String> cbMetodoPago = new JComboBox<String>();
