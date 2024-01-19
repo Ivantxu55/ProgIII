@@ -64,7 +64,7 @@ public class VentanaMenuPrincipal {
 	
 	public VentanaMenuPrincipal(){
 		
-		logger.info(String.format("Accediendo a la ventana3."));
+		logger.info(String.format("Has accedido al menu principal de la app."));
 		
 		//Lista de imagenes posibles
 		List<String> imgs = new ArrayList<>(Arrays.asList(	"img/A3_Cartel_FESTIVAL_DE_JAZZ-scaled.png", 
@@ -119,7 +119,7 @@ public class VentanaMenuPrincipal {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				VentanaFestival i= new VentanaFestival(festivales);
+				VentanaFestivales1 i= new VentanaFestivales1(festivales);
 				frame.dispose();
 				//IMPLEMENTAR DATOS DE FESTIVAL EN TABLA
 				i.seguirBoton.setEnabled(true);
@@ -135,7 +135,7 @@ public class VentanaMenuPrincipal {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				VentanaConciertos i= new VentanaConciertos(conciertos);
+				VentanaConciertos1 i= new VentanaConciertos1(conciertos);
 				frame.dispose();
 				//IMPLEMENTAR DATOS DE CONCIERTO EN TABLA
 				i.seguirBoton.setEnabled(true);

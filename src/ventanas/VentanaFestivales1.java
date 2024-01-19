@@ -38,10 +38,11 @@ public class VentanaFestivales1 extends JFrame{
 	private JLabel labelLogoConciertos = new JLabel(new ImageIcon("img/BannerFestivales.png"));
 	private JMenuBar menuBar;
 	
-	protected static final Logger logger = Logger.getLogger(VentanaFestival.class.getName());
+	protected static final Logger logger = Logger.getLogger(Main.class.getName());
 	private Festival elegido;
 	
 	public VentanaFestivales1(ArrayList<Festival> festivales) {
+		logger.info(String.format("Has entrado a festivales"));
 		
 		// Configuración de la ventana.
 		setTitle("Ventana conciertos 1");
