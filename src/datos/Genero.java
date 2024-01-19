@@ -7,10 +7,10 @@ package datos;
 import java.awt.Color;
 
 public enum Genero {
-	BLUES(Color.BLUE),
+	BLUES(Color.CYAN),
     ELECTRONICA(Color.CYAN),
     HIP_HOP(Color.ORANGE),
-    METAL(Color.DARK_GRAY),
+    METAL(Color.RED),
     REGGAE(Color.GREEN),
     REGGAETON(Color.MAGENTA),
     FOLK(Color.YELLOW),
