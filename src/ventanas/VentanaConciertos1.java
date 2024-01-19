@@ -99,7 +99,7 @@ public class VentanaConciertos1 extends JFrame{
 				if (elegido!= null) {
 					//TODO
 					//CAMBIARLO CUANDO CONVENGA LA LLAMADA A SIGUIENTE VENTANA
-					VentanaPago v = new VentanaPago(elegido.getNombre(), Tipo.Concierto);
+					VentanaPago v = new VentanaPago(elegido);
 					dispose();
 				} else {
 					JOptionPane.showMessageDialog(null, "Seleccione un concierto para poder continuar.");

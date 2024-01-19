@@ -111,7 +111,7 @@ public class VentanaFestivales1 extends JFrame{
 				if (elegido!= null) {
 					//TODO
 					//CAMBIARLO CUANDO CONVENGA LA LLAMADA A SIGUIENTE VENTANA
-					VentanaPago v = new VentanaPago(elegido.getNombre(), Tipo.Festival);
+					VentanaPago v = new VentanaPago(elegido);
 					dispose();
 				} else {
 					JOptionPane.showMessageDialog(null, "Seleccione un concierto para poder continuar.");
