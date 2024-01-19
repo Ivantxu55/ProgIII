@@ -138,7 +138,7 @@ public class VentanaPago extends JFrame{
 		panel.add(txtTarjeta, gbc);
 		
 		gbc.gridx = 1;
-		gbc.gridy = 5;
+		gbc.gridy = 6;
 		gbc.gridwidth = 3;
 		gbc.gridheight = 1;
 		gbc.fill = GridBagConstraints.CENTER;
@@ -168,8 +168,24 @@ public class VentanaPago extends JFrame{
 				}
 			}
 		});
-		
+		/*
+		int i = 0;
+		recursive(i);
+		*/
 	}
 	
+	public Integer recursive(int f) {
+       if(f < 100) {
+    	   try {
+			Object.class.wait();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+            return recursive(f++);
+        } else {
+        	return f;
+		}
+    }
 	
 }
