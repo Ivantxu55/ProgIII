@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
@@ -69,24 +70,6 @@ public class VentanaFestivales1 extends JFrame{
 		tablaFestival.setRowSelectionAllowed(true);
 		
 		tablaFestival = new JTable(tablamodelo);
-		TableCellRenderer cellRenderer = (table, value, isSelected, hasFocus, row, column) -> {
-			JLabel result = new JLabel(value.toString());
-
-			if (row % 2 == 0) {
-				result.setBackground(new Color(250, 249, 249));
-			}
-
-			if (isSelected) {
-				result.setBackground(table.getSelectionBackground());
-				result.setForeground(table.getSelectionForeground());
-			}
-
-			result.setOpaque(true);
-
-			return result;
-		};
-
-		this.tablaFestival.setDefaultRenderer(Object.class, cellRenderer);
 		
 		scrollTablaFestival = new JScrollPane(tablaFestival);
 		
@@ -105,22 +88,62 @@ public class VentanaFestivales1 extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				int filaSeleccionada = tablaFestival.getSelectedRow();
-				elegido = festivales.get(filaSeleccionada);
+				try {
+					int filaSeleccionada = tablaFestival.getSelectedRow();
+					elegido = festivales.get(filaSeleccionada);
 
-				if (elegido!= null) {
-					//TODO
-					//CAMBIARLO CUANDO CONVENGA LA LLAMADA A SIGUIENTE VENTANA
-					VentanaPago v = new VentanaPago(elegido);
-					dispose();
-				} else {
-					JOptionPane.showMessageDialog(null, "Seleccione un concierto para poder continuar.");
+					if (elegido!= null) {
+						//TODO
+						//CAMBIARLO CUANDO CONVENGA LA LLAMADA A SIGUIENTE VENTANA
+						VentanaPago v = new VentanaPago(elegido);
+						dispose();
+					} else {
+						JOptionPane.showMessageDialog(null, "Seleccione un festival para poder continuar.");
+					}
+				} catch (Exception e2) {
+					JOptionPane.showMessageDialog(null, "Seleccione un festival para poder continuar.");
 				}
+				
 			}
 		});
 		
+        TableCellRenderer cellFestival = (table, value, isSelected, hasFocus, row, column) -> {
+			JLabel result = new JLabel(value.toString());
+			
+			result.setBackground(table.getBackground());
+			result.setForeground(table.getForeground());
+			result.setHorizontalAlignment(JLabel.CENTER);
+			
+        	if(table.equals(tablaFestival)) {
+    				result.setBackground(randColor());
+    			
+    			if (value instanceof Float) {
+            		result.setHorizontalAlignment(JLabel.LEFT);
+            		result.setText(value.toString() + "€");
+            	
+    			}
+    			
+    			if(isSelected) {
+    				result.setBackground(randColor().darker());
+    			}
+        	}
+        	result.setOpaque(true);
+        	return result;
+        	
+        };
+        tablaFestival.setDefaultRenderer(Object.class, cellFestival);
+		
 		// Configuración de la ventana.
 		setVisible(true);
+	}
+	
+	public static Color randColor() {
+		final float hue = new Random().nextFloat();
+		// Saturation between 0.1 and 0.3
+		final float saturation = (new Random().nextInt(2000) + 1000) / 10000f;
+		final float luminance = 0.9f;
+		final Color color = Color.getHSBColor(hue, saturation, luminance);
+		return color;
 	}
 	
 	public static void main(String[] args) {

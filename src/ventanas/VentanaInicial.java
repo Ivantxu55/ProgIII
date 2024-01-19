@@ -70,38 +70,6 @@ public class VentanaInicial extends JFrame{
         frame.setVisible(true);
         frame.setResizable(true);
         
-        TableCellRenderer cellConcierto = (table, value, isSelected, hasFocus, row, column) -> {
-			JLabel result = new JLabel(value.toString());
-			
-			result.setBackground(table.getBackground());
-			result.setForeground(table.getForeground());
-			result.setHorizontalAlignment(JLabel.CENTER);
-			Genero g = Genero.valueOf(table.getValueAt(row, 1).toString());
-			result.setBackground(g.getColor());
-
-			
-    	    if (isSelected) {
-                result.setBackground(g.getColor().darker());
-            }
-			
-        	if(table.equals(tabla)) {
-        			
-        			if (value instanceof Float) {
-                		result.setHorizontalAlignment(JLabel.LEFT);
-                		result.setText(value.toString() + "€");
-                	
-        		}
-        		
-            	
-            	
-        	}
-
-        	
-        	result.setOpaque(true);
-        	return result;
-        	
-        };
-        
         TableCellRenderer cellFestival = (table, value, isSelected, hasFocus, row, column) -> {
 			JLabel result = new JLabel(value.toString());
 			

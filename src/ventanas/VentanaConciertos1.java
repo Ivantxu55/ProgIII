@@ -6,6 +6,7 @@ import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
 
 import datos.Concierto;
+import datos.Genero;
 import datos.ParseCSV;
 import datos.Tipo;
 import modelos.ModeloTablaConciertoCliente;
@@ -57,24 +58,6 @@ public class VentanaConciertos1 extends JFrame{
 		tablaConciertos.setRowSelectionAllowed(true);
 		
 		tablaConciertos = new JTable(tablamodelo);
-		TableCellRenderer cellRenderer = (table, value, isSelected, hasFocus, row, column) -> {
-			JLabel result = new JLabel(value.toString());
-
-			if (row % 2 == 0) {
-				result.setBackground(new Color(250, 249, 249));
-			}
-
-			if (isSelected) {
-				result.setBackground(table.getSelectionBackground());
-				result.setForeground(table.getSelectionForeground());
-			}
-
-			result.setOpaque(true);
-
-			return result;
-		};
-
-		this.tablaConciertos.setDefaultRenderer(Object.class, cellRenderer);
 		
 		scrollTablaConciertos = new JScrollPane(tablaConciertos);
 		
@@ -93,20 +76,51 @@ public class VentanaConciertos1 extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				int filaSeleccionada = tablaConciertos.getSelectedRow();
-				elegido = conciertos.get(filaSeleccionada);
+				try {
+					int filaSeleccionada = tablaConciertos.getSelectedRow();
+					elegido = conciertos.get(filaSeleccionada);
 
-				if (elegido!= null) {
-					//TODO
-					//CAMBIARLO CUANDO CONVENGA LA LLAMADA A SIGUIENTE VENTANA
-					VentanaPago v = new VentanaPago(elegido);
-					dispose();
-				} else {
+					if (elegido!= null) {
+						//TODO
+						//CAMBIARLO CUANDO CONVENGA LA LLAMADA A SIGUIENTE VENTANA
+						VentanaPago v = new VentanaPago(elegido);
+						dispose();
+					} else {
+						JOptionPane.showMessageDialog(null, "Seleccione un concierto para poder continuar.");
+					}
+				} catch (Exception e2) {
 					JOptionPane.showMessageDialog(null, "Seleccione un concierto para poder continuar.");
 				}
 			}
 		});
 		
+		
+	      TableCellRenderer cellConcierto = (table, value, isSelected, hasFocus, row, column) -> {
+				JLabel result = new JLabel(value.toString());
+				
+				result.setBackground(table.getBackground());
+				result.setForeground(table.getForeground());
+				result.setHorizontalAlignment(JLabel.CENTER);
+				Genero g = Genero.valueOf(table.getValueAt(row, 1).toString());
+				result.setBackground(g.getColor());
+
+				
+	    	    if (isSelected) {
+	                result.setBackground(g.getColor().darker());
+	            }
+	    	    
+        			if (value instanceof Float) {
+                		result.setHorizontalAlignment(JLabel.LEFT);
+                		result.setText(value.toString() + "€");
+
+	        	}
+
+	        	result.setOpaque(true);
+	        	return result;
+	        	
+	        };
+		
+	    tablaConciertos.setDefaultRenderer(Object.class, cellConcierto);
 		// Configuración de la ventana.
 		setVisible(true);
 	}
