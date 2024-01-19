@@ -48,11 +48,10 @@ public class VentanaConciertos  extends JFrame {
 
 	private JTable tablaConciertos;
 	private JMenuBar menuConcierto;
-	private JMenu filtros;
-	private JMenuItem nomCon, fechCon, artCon, genCon;
-	private JTextField txtFiltro;
-
 	protected JButton seguirBoton;
+	private JLabel labelLogo = new JLabel(new ImageIcon("img/logo - copia.png"));
+	private JMenuBar menuBar1 = new JMenuBar();
+	private JLabel espacioB0 = new JLabel("                                               ");
 	
 	protected static final Logger logger = Logger.getLogger(VentanaFestival.class.getName());
 	private Concierto elegido;
@@ -79,63 +78,17 @@ public class VentanaConciertos  extends JFrame {
 
 		menuConcierto = new JMenuBar();
 		this.setJMenuBar(menuConcierto);
-		filtros = new JMenu("Filtros");
 
 		JPanel panelVacio = new JPanel();
-		txtFiltro = new JTextField();
 
 		JPanel buscador = new JPanel(new GridBagLayout());
 		
-		JLabel buscadorLabel = new JLabel("Filtrar por nombre:    ");
-		menuConcierto.add(filtros);
 		menuConcierto.add(panelVacio);
-		// Insets u = new Insets(0, 0, 0, 40);
-		panelVacio.setBounds(0, 0, 220, buscadorLabel.getHeight());
 		panelVacio.setBorder(new EmptyBorder(10, 10, 10, 300));
 		panelVacio.setBackground(this.getBackground());
 		menuConcierto.add(buscador);
 
 		GridBagConstraints gbc = new GridBagConstraints();
-		gbc.gridx = 1;
-		gbc.gridy = 1;
-		gbc.gridwidth = 1;
-		gbc.gridheight = 1;
-		gbc.anchor = GridBagConstraints.EAST;
-		gbc.insets = new Insets(0, 20, 0, 0);
-		gbc.weightx = 0.3;
-		buscador.add(buscadorLabel, gbc);
-
-		gbc.gridx = 2;
-		gbc.gridy = 1;
-		gbc.gridwidth = 2;
-		gbc.gridheight = 1;
-		gbc.anchor = GridBagConstraints.CENTER;
-		gbc.fill = GridBagConstraints.HORIZONTAL;
-		gbc.weightx = 0.7;
-
-		gbc.insets = new Insets(4, 0, 0, 0);
-
-		buscador.add(txtFiltro, gbc);
-
-		nomCon = new JMenuItem("Nombre");
-		fechCon = new JMenu("Fecha");
-		artCon = new JMenuItem("Artista");
-		genCon = new JMenu("Género");
-		filtros.add(nomCon);
-		filtros.add(fechCon);
-
-		JCalendar calendar = new JCalendar();
-		JPanel data = new JPanel();
-		data.add(calendar);
-		fechCon.add(data);
-
-		filtros.add(artCon);
-		filtros.add(genCon);
-		JCheckBoxMenuItem i;
-		for (Genero genero : Genero.values()) {
-			i = new JCheckBoxMenuItem(genero.name());
-			genCon.add(i);
-		}
 
 		seguirBoton = new JButton("Seguir");
 		JPanel panelBotonesFinal = new JPanel();
