@@ -34,6 +34,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.plaf.basic.BasicOptionPaneUI.ButtonActionListener;
 
+import bd.DBManager;
 import datos.Concierto;
 import datos.Festival;
 import datos.ParseCSV;
@@ -79,8 +80,10 @@ public class VentanaMenuPrincipal {
 		
 		JFrame frame = new JFrame("VentanaMenuPrincipal");
 		frame.setSize(900, 600);
-		ArrayList<Concierto> conciertos = ParseCSV.leerConciertos("resources/CSV/Conciertos.csv");
-		ArrayList<Festival> festivales = ParseCSV.leerFestivales("resources/CSV/Festivales.csv", conciertos);
+		DBManager.abrirConexion();
+		
+		ArrayList<Concierto> conciertos = DBManager.getConciertos();
+		ArrayList<Festival> festivales = DBManager.getFestivales();
 	
 		//Se colocan los componentes en los JMenuBar
 		frame.add(panelMenuBar);

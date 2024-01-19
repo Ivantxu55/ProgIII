@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.stream.Collectors;
 
+import bd.DBManager;
+
 public class Festival {
 
 	protected int id;
@@ -14,6 +16,7 @@ public class Festival {
 	protected String descripcion;
 	protected float precio;
 	protected ArrayList<Genero> generos;
+	protected ArrayList<Integer> idConciertos;
 
 	public int getId() {
 	return id;
@@ -79,26 +82,17 @@ public class Festival {
 		this.generos = generos;
 	}
 	
-	public Festival(int id, String nombre, Date fechaInicio, Date fechaFin, ArrayList<Concierto> conciertos,
-			String descripcion) {
+	public Festival(int id, String nombre, Date fechaInicio, Date fechaFin,
+			String descripcion, ArrayList<Integer> idConciertos) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
-		this.conciertos = conciertos;
 		this.descripcion = descripcion;
-        Float p = 0f;
-        if(this.conciertos != null) { 
-        	for(Concierto c: this.conciertos) p =+ c.getPrecio();
-        	}
-        
-		this.precio = p;
-				
-		this.generos = this.conciertos.stream()
-                .map(Concierto::getGenero)
-                .distinct()
-                .collect(Collectors.toCollection(ArrayList::new));
+
+        this.idConciertos = idConciertos;
+        this.conciertos = new ArrayList<Concierto>();
 	}
 	
 	@Override
@@ -106,6 +100,21 @@ public class Festival {
 		return "Festival [id=" + id + ", nombre=" + nombre + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin
 				+ ", conciertos=" + conciertos + ", descripcion=" + descripcion + ", precio=" + precio + ", generos="
 				+ generos + "]";
+	}
+	public void actualizar() {
+        for(Integer i: this.idConciertos) {
+			this.conciertos.add(ParseCSV.encontrarConciertoPorId(DBManager.getConciertos(), i));
+		}
+		Float p = 0f;
+        if(this.conciertos != null) { 
+        	for(Concierto c: this.conciertos) p =+ c.getPrecio();
+        	}
+        this.precio = p;
+		this.generos = this.conciertos.stream()
+                .map(Concierto::getGenero)
+                .distinct()
+                .collect(Collectors.toCollection(ArrayList::new));
+	
 	}
 	
 	public String toStringPers() {

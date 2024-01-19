@@ -125,8 +125,5 @@ public class VentanaConciertos1 extends JFrame{
 		setVisible(true);
 	}
 	
-	public static void main(String[] args) {
-		ArrayList<Concierto> c = ParseCSV.leerConciertos("resources/CSV/Conciertos.csv");
-		VentanaConciertos1 v = new VentanaConciertos1(c);
-	}
+
 }

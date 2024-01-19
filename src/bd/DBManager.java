@@ -59,22 +59,24 @@ public class DBManager {
 	public static ArrayList<Festival> getFestivales(){
 		ArrayList<Festival> result = new ArrayList<>();
 		ArrayList<Concierto> con = getConciertos();
+		ArrayList<Integer> ids = new ArrayList<>();
 		try(Statement stmt = conn.createStatement()){
 			ResultSet rs = stmt.executeQuery("SELECT * FROM Festivales");
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 			while(rs.next()) {
-				ArrayList<Concierto> cs = new ArrayList<>();
 				String c = rs.getString("conciertos");
 				String[] s = c.split(";");
 				for(int i = 0; i<s.length; i++) {
-					Concierto a = ParseCSV.encontrarConciertoPorNombre(con, s[i]);
-					cs.add(a);
+					ids.add(Integer.parseInt(s[i]));
 				}
-				Festival f = new Festival(rs.getInt("id"), rs.getString("nombre"), sdf.parse(rs.getString("fechaInicio")), sdf.parse(rs.getString("fechaFin")), cs,  rs.getString("descripcion"));
+				Festival f = new Festival(rs.getInt("id"), rs.getString("nombre"), sdf.parse(rs.getString("fechaInicio")), sdf.parse(rs.getString("fechaFin")),  rs.getString("descripcion"), ids);
 				result.add(f);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+		for(Festival f: result) {
+			f.actualizar();
 		}
 		return result;
 	}
@@ -94,5 +96,13 @@ public class DBManager {
 				e.printStackTrace();
 			}
 		
+	}
+	public static void main(String[] args) {
+		abrirConexion();
+		ArrayList<Festival> con = getFestivales();
+		
+		System.out.println(con);
+		cerrarConexion();
+	
 	}
 } 

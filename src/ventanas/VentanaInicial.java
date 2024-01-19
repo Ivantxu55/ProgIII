@@ -115,11 +115,6 @@ public class VentanaInicial extends JFrame{
 		return color;
 	}
 
-	public static void main(String[] args) {
-		ArrayList<Concierto> c = ParseCSV.leerConciertos("resources/CSV/Conciertos.csv");
-		ArrayList<Festival> f = ParseCSV.leerFestivales("resources/CSV/Festivales.csv", c);
-		
-		SwingUtilities.invokeLater(() -> new VentanaInicial(c, f));
-	}
+
 
 }
