@@ -1,0 +1,5 @@
+Nombre,Genero,Fecha,Artista,Descripcion,Precio,Aforo
+Concierto1,Pop,2023-12-01,Artista1,Primer concierto de Pop,20.0,500
+Concierto2,Rock,2023-12-02,Artista2,Increible concierto de Rock,25.0,600
+Concierto3,Electronica,2023-12-03,Artista3,Concierto de musica electronica,18.0,400
+Concierto4,Jazz,2023-12-04,Artista4,Experiencia unica de Jazz,22.0,550

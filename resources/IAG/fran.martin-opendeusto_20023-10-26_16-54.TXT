@@ -1,0 +1,634 @@
+hola
+ChatGPT
+¡Hola! ¿En qué puedo ayudarte hoy?
+
+
+
+
+User
+Teniendo en cuenta las siguientes clases Concierto y Festival, y el enumerador Genero:
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.ThreadLocalRandom;
+
+
+public class Concierto{
+		private int id;
+		private String nombre;
+		private Genero genero;
+		private Date fecha;
+		private String artista;
+		private String descripcion;
+		private Float precio;
+		private int aforo;
+		private static List conciertos = new ArrayList<Concierto>();
+		
+		public Concierto(int id, String nombre, Genero genero, Date fecha, String artista, String descripcion, Float precio,
+				int aforo) {
+			super();
+			this.id = id;
+			this.nombre = nombre;
+			this.genero = genero;
+			this.fecha = fecha;
+			this.artista = artista;
+			this.descripcion = descripcion;
+			this.precio = precio;
+			this.aforo = aforo;
+		}
+		public Concierto() {
+			super();
+			this.id = 0;
+			this.nombre = "";
+			this.genero = genero.ACÚSTICA;
+			this.fecha = null;
+			this.artista = "";
+			this.descripcion = "";
+			this.precio = (float) 0;
+			this.aforo = 0;
+		}
+		public int getId() {
+			return id;
+		}
+		public void setId(int id) {
+			this.id = id;
+		}
+		public String getNombre() {
+			return nombre;
+		}
+		public void setNombre(String nombre) {
+			this.nombre = nombre;
+		}
+		public Genero getGenero() {
+			return genero;
+		}
+		public void setGenero(Genero genero) {
+			this.genero = genero;
+		}
+		public Date getFecha() {
+			return fecha;
+		}
+		public void setFecha(Date fecha) {
+			this.fecha = fecha;
+		}
+		public String getArtista() {
+			return artista;
+		}
+		public void setArtista(String artista) {
+			this.artista = artista;
+		}
+		public String getDescripcion() {
+			return descripcion;
+		}
+		public void setDescripcion(String descripcion) {
+			this.descripcion = descripcion;
+		}
+		public Float getPrecio() {
+			return precio;
+		}
+		public void setPrecio(Float precio) {
+			this.precio = precio;
+		}
+		public int getAforo() {
+			return aforo;
+		}
+		public void setAforo(int aforo) {
+			this.aforo = aforo;
+		}
+		@Override
+		public int hashCode() {
+			return Objects.hash(aforo, artista, descripcion, fecha, genero, id, nombre, precio);
+		}
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			Concierto other = (Concierto) obj;
+			return aforo == other.aforo && Objects.equals(artista, other.artista)
+					&& Objects.equals(descripcion, other.descripcion) && Objects.equals(fecha, other.fecha)
+					&& Objects.equals(genero, other.genero)
+					&& id == other.id && Objects.equals(nombre, other.nombre) && Objects.equals(precio, other.precio);
+		}
+		@Override
+		public String toString() {
+			return "Concierto [id=" + id + ", nombre=" + nombre + ", genero=" + genero + ", fecha=" + fecha
+					+ ", artista=" + artista + ", descripcion=" + descripcion + ", precio=" + precio + ", aforo="
+					+ aforo + "]";
+		}
+
+import java.util.ArrayList;
+import java.util.Date;
+
+public class Festival {
+
+protected int id;
+protected String nombre;
+protected Date fechaInicio;
+protected Date fechaFin;
+protected ArrayList<Concierto> conciertos;
+protected String descripcion;
+protected float precio;
+
+public int getId() {
+return id;
+}
+public void setId(int id) {
+this.id = id;
+}
+
+public String getNombre() {
+return nombre;
+}
+public void setNombre(String nombre) {
+this.nombre = nombre;
+}
+
+public Date getFechaInicio() {
+return fechaInicio;
+}
+public void setFechaInicio(Date fechaInicio) {
+this.fechaInicio = fechaInicio;
+}
+
+public Date getFechaFin() {
+return fechaFin;
+}
+public void setFechaFin(Date fechaFin) {
+this.fechaFin = fechaFin;
+}
+
+public ArrayList<Concierto> getConciertos() {
+return conciertos;
+}
+public void setConciertos(ArrayList<Concierto> conciertos) {
+this.conciertos = conciertos;
+}
+
+public String getDescripcion() {
+return descripcion;
+}
+public void setDescripcion(String descripcion) {
+this.descripcion = descripcion;
+}
+
+public float getPrecio() {
+return precio;
+}
+public void setPrecio(float precio) {
+this.precio = precio;
+}
+
+
+
+public Festival(int id, String nombre, Date fechaInicio, Date fechaFin, ArrayList<Concierto> conciertos,
+String descripcion, float precio) {
+super();
+this.id = id;
+this.nombre = nombre;
+this.fechaInicio = fechaInicio;
+this.fechaFin = fechaFin;
+this.conciertos = conciertos;
+this.descripcion = descripcion;
+this.precio = precio;
+}
+
+@Override
+public String toString() {
+return "Festival [id=" + id + ", nombre=" + nombre + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin
++ ", descripcion=" + descripcion + ", precio=" + precio + "]";
+}
+}
+
+public enum Genero {
+	ACÚSTICA,
+    ALTERNATIVA,
+    BLUES,
+    CALAPSO,
+    COUNTRY,
+    DANCE,
+    ELECTRONICA,
+    FUNK,
+    HIP_HOP,
+    JAZZ,
+    METAL,
+    REGGAE,
+    REGGAETON,
+    ROCK,
+    SOUL,
+    TRIP_HOP,
+    WORLD,
+    BALADA,
+    BOLERO,
+    CANCIÓN_PROTESTA,
+    CARNAVAL,
+    CUMBIA,
+    DISCO,
+    FADO,
+    FOLK,
+    GOLPE,
+    HIPHOP_LATINOAMERICANO,
+    INDIE,
+    INSTRUMENTAL,
+    LATIN_POP,
+    CLÁSICA,
+    FOLKLÓRICA,
+    HOUSE,
+    LATINA,
+    POP,
+    SAMBA,
+    SON,
+    TANGO,
+    TRAP,
+    WORLD_MUSIC;
+
+}
+Genera en el lenguaje de programación Java, 10 ejemplos de conciertos y 7 ejemplos de festivales que contengan conciertos previamente generados en sus datos.
+
+ChatGPT
+Aquí tienes 10 ejemplos de conciertos y 7 ejemplos de festivales que contienen conciertos previamente generados en sus datos en Java:
+
+java
+Copy code
+import java.util.Date;
+import java.util.ArrayList;
+
+public class EjemplosConciertosYFestivales {
+
+    public static void main(String[] args) {
+        // Crear 10 ejemplos de conciertos
+        Concierto concierto1 = new Concierto(1, "Concierto 1", Genero.ROCK, new Date(), "Artista 1", "Descripción 1", 50.0f, 1000);
+        Concierto concierto2 = new Concierto(2, "Concierto 2", Genero.POP, new Date(), "Artista 2", "Descripción 2", 45.0f, 800);
+        Concierto concierto3 = new Concierto(3, "Concierto 3", Genero.JAZZ, new Date(), "Artista 3", "Descripción 3", 60.0f, 1200);
+        Concierto concierto4 = new Concierto(4, "Concierto 4", Genero.ELECTRONICA, new Date(), "Artista 4", "Descripción 4", 55.0f, 1500);
+        Concierto concierto5 = new Concierto(5, "Concierto 5", Genero.COUNTRY, new Date(), "Artista 5", "Descripción 5", 40.0f, 700);
+        Concierto concierto6 = new Concierto(6, "Concierto 6", Genero.LATIN_POP, new Date(), "Artista 6", "Descripción 6", 70.0f, 2000);
+        Concierto concierto7 = new Concierto(7, "Concierto 7", Genero.REGGAE, new Date(), "Artista 7", "Descripción 7", 48.0f, 900);
+        Concierto concierto8 = new Concierto(8, "Concierto 8", Genero.METAL, new Date(), "Artista 8", "Descripción 8", 65.0f, 1700);
+        Concierto concierto9 = new Concierto(9, "Concierto 9", Genero.HIPHOP_LATINOAMERICANO, new Date(), "Artista 9", "Descripción 9", 58.0f, 1100);
+        Concierto concierto10 = new Concierto(10, "Concierto 10", Genero.ALTERNATIVA, new Date(), "Artista 10", "Descripción 10", 62.0f, 1300);
+
+        // Crear 7 ejemplos de festivales que contienen conciertos
+        ArrayList<Concierto> conciertosFestival1 = new ArrayList<>();
+        conciertosFestival1.add(concierto1);
+        conciertosFestival1.add(concierto2);
+        Festival festival1 = new Festival(1, "Festival 1", new Date(), new Date(), conciertosFestival1, "Descripción Festival 1", 100.0f);
+
+        ArrayList<Concierto> conciertosFestival2 = new ArrayList<>();
+        conciertosFestival2.add(concierto3);
+        conciertosFestival2.add(concierto4);
+        Festival festival2 = new Festival(2, "Festival 2", new Date(), new Date(), conciertosFestival2, "Descripción Festival 2", 90.0f);
+
+        ArrayList<Concierto> conciertosFestival3 = new ArrayList<>();
+        conciertosFestival3.add(concierto5);
+        conciertosFestival3.add(concierto6);
+        Festival festival3 = new Festival(3, "Festival 3", new Date(), new Date(), conciertosFestival3, "Descripción Festival 3", 80.0f);
+
+        ArrayList<Concierto> conciertosFestival4 = new ArrayList<>();
+        conciertosFestival4.add(concierto7);
+        Festival festival4 = new Festival(4, "Festival 4", new Date(), new Date(), conciertosFestival4, "Descripción Festival 4", 70.0f);
+
+        ArrayList<Concierto> conciertosFestival5 = new ArrayList<>();
+        conciertosFestival5.add(concierto8);
+        conciertosFestival5.add(concierto9);
+        conciertosFestival5.add(concierto10);
+        Festival festival5 = new Festival(5, "Festival 5", new Date(), new Date(), conciertosFestival5, "Descripción Festival 5", 110.0f);
+
+        // Puedes continuar creando más ejemplos de festivales si es necesario.
+    }
+}
+Estos son solo ejemplos, y puedes ajustar los valores y atributos de acuerdo a tus necesidades específicas.
+
+
+
+
+User
+Añade fechas aleatorias pero que sean coherentes ya que en festival, tenemos la fecha de inicio y la fecha de fin 
+ChatGPT
+Para generar fechas aleatorias coherentes para los conciertos y festivales, puedes utilizar la clase ThreadLocalRandom para obtener fechas dentro de un rango específico. Aquí tienes una versión modificada del código anterior con fechas aleatorias coherentes para los festivales:
+
+java
+Copy code
+import java.util.Date;
+import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
+import java.text.SimpleDateFormat;
+
+public class EjemplosConciertosYFestivales {
+
+    public static void main(String[] args) {
+        // Crear 10 ejemplos de conciertos
+        Concierto concierto1 = crearConcierto("Concierto 1", Genero.ROCK, 1000, 50.0f);
+        Concierto concierto2 = crearConcierto("Concierto 2", Genero.POP, 800, 45.0f);
+        Concierto concierto3 = crearConcierto("Concierto 3", Genero.JAZZ, 1200, 60.0f);
+        Concierto concierto4 = crearConcierto("Concierto 4", Genero.ELECTRONICA, 1500, 55.0f);
+        Concierto concierto5 = crearConcierto("Concierto 5", Genero.COUNTRY, 700, 40.0f);
+        Concierto concierto6 = crearConcierto("Concierto 6", Genero.LATIN_POP, 2000, 70.0f);
+        Concierto concierto7 = crearConcierto("Concierto 7", Genero.REGGAE, 900, 48.0f);
+        Concierto concierto8 = crearConcierto("Concierto 8", Genero.METAL, 1700, 65.0f);
+        Concierto concierto9 = crearConcierto("Concierto 9", Genero.HIPHOP_LATINOAMERICANO, 1100, 58.0f);
+        Concierto concierto10 = crearConcierto("Concierto 10", Genero.ALTERNATIVA, 1300, 62.0f);
+
+        // Crear 7 ejemplos de festivales que contienen conciertos
+        ArrayList<Concierto> conciertosFestival1 = new ArrayList<>();
+        conciertosFestival1.add(concierto1);
+        conciertosFestival1.add(concierto2);
+        Festival festival1 = crearFestival("Festival 1", 100.0f, conciertosFestival1);
+
+        ArrayList<Concierto> conciertosFestival2 = new ArrayList<>();
+        conciertosFestival2.add(concierto3);
+        conciertosFestival2.add(concierto4);
+        Festival festival2 = crearFestival("Festival 2", 90.0f, conciertosFestival2);
+
+        ArrayList<Concierto> conciertosFestival3 = new ArrayList<>();
+        conciertosFestival3.add(concierto5);
+        conciertosFestival3.add(concierto6);
+        Festival festival3 = crearFestival("Festival 3", 80.0f, conciertosFestival3);
+
+        ArrayList<Concierto> conciertosFestival4 = new ArrayList<>();
+        conciertosFestival4.add(concierto7);
+        Festival festival4 = crearFestival("Festival 4", 70.0f, conciertosFestival4);
+
+        ArrayList<Concierto> conciertosFestival5 = new ArrayList<>();
+        conciertosFestival5.add(concierto8);
+        conciertosFestival5.add(concierto9);
+        conciertosFestival5.add(concierto10);
+        Festival festival5 = crearFestival("Festival 5", 110.0f, conciertosFestival5);
+    }
+
+    private static Concierto crearConcierto(String nombre, Genero genero, int aforo, float precio) {
+        int id = ThreadLocalRandom.current().nextInt(1, 1000);
+        Date fecha = generarFechaAleatoria();
+        String artista = "Artista " + id;
+        String descripcion = "Descripción " + id;
+
+        return new Concierto(id, nombre, genero, fecha, artista, descripcion, precio, aforo);
+    }
+
+    private static Festival crearFestival(String nombre, float precio, ArrayList<Concierto> conciertos) {
+        int id = ThreadLocalRandom.current().nextInt(1, 1000);
+        Date fechaInicio = generarFechaAleatoria();
+        Date fechaFin = generarFechaAleatoriaDespuesDe(fechaInicio);
+        String descripcion = "Descripción " + id;
+
+        Festival festival = new Festival(id, nombre, fechaInicio, fechaFin, conciertos, descripcion, precio);
+        return festival;
+    }
+
+    private static Date generarFechaAleatoria() {
+        long minDay = Timestamp.valueOf("2023-01-01 00:00:00").getTime();
+        long maxDay = Timestamp.valueOf("2023-12-31 00:00:00").getTime();
+        long randomDay = ThreadLocalRandom.current().nextLong(minDay, maxDay);
+        return new Date(randomDay);
+    }
+
+    private static Date generarFechaAleatoriaDespuesDe(Date fecha) {
+        long minDay = fecha.getTime();
+        long maxDay = Timestamp.valueOf("2023-12-31 00:00:00").getTime();
+        long randomDay = ThreadLocalRandom.current().nextLong(minDay, maxDay);
+        return new Date(randomDay);
+    }
+}
+Este código utiliza el método generarFechaAleatoria para generar fechas aleatorias en el año 2023 y generarFechaAleatoriaDespuesDe para generar una fecha aleatoria después de una fecha dada, lo que garantiza coherencia entre la fecha de inicio y la fecha de fin de los festivales. Puedes ajustar el año y otros parámetros según tus necesidades.
+
+
+
+
+User
+añade un atributo más a los festivales, este atributo es "generos" u es una lista de generos al igual que la clase ya contiene una lista de conciertos
+ChatGPT
+Claro, puedo ayudarte a agregar un atributo "generos" que sea una lista de géneros a la clase Festival. Aquí tienes la versión modificada de la clase Festival con este nuevo atributo:
+
+java
+Copy code
+import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Festival {
+
+    protected int id;
+    protected String nombre;
+    protected Date fechaInicio;
+    protected Date fechaFin;
+    protected List<Genero> generos;
+    protected ArrayList<Concierto> conciertos;
+    protected String descripcion;
+    protected float precio;
+
+    public Festival(int id, String nombre, Date fechaInicio, Date fechaFin, List<Genero> generos, ArrayList<Concierto> conciertos, String descripcion, float precio) {
+        this.id = id;
+        this.nombre = nombre;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.generos = generos;
+        this.conciertos = conciertos;
+        this.descripcion = descripcion;
+        this.precio = precio;
+    }
+
+    // Getters y setters para el nuevo atributo "generos"
+    public List<Genero> getGeneros() {
+        return generos;
+    }
+
+    public void setGeneros(List<Genero> generos) {
+        this.generos = generos;
+    }
+
+    // Resto de los getters y setters
+    // ...
+}
+Ahora, el atributo "generos" es una lista de géneros que puedes asignar a cada festival. Puedes modificar la creación de festivales en el código de ejemplo anterior para incluir esta nueva lista de géneros. Por ejemplo:
+
+java
+Copy code
+ArrayList<Concierto> conciertosFestival1 = new ArrayList<>();
+conciertosFestival1.add(concierto1);
+conciertosFestival1.add(concierto2);
+
+ArrayList<Genero> generosFestival1 = new ArrayList<>();
+generosFestival1.add(Genero.ROCK);
+generosFestival1.add(Genero.POP);
+
+Festival festival1 = new Festival(1, "Festival 1", new Date(), new Date(), generosFestival1, conciertosFestival1, "Descripción Festival 1", 100.0f);
+De esta manera, cada festival puede tener una lista de géneros asociados. Puedes hacer lo mismo para los demás festivales.
+
+
+
+
+User
+regenera la clase EjemploConciertosYFestivales y llama a la clase Ejemplo
+ChatGPT
+Claro, a continuación, te proporciono la clase EjemplosConciertosYFestivales actualizada y un ejemplo de cómo llamarla desde otra clase llamada Ejemplo:
+
+java
+Copy code
+import java.util.Date;
+import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.List;
+
+public class EjemplosConciertosYFestivales {
+
+    public static void main(String[] args) {
+        // Crear 10 ejemplos de conciertos
+        ArrayList<Concierto> conciertos = new ArrayList<>();
+        for (int i = 1; i <= 10; i++) {
+            Concierto concierto = crearConcierto("Concierto " + i, Genero.values()[i - 1], 1000 + i * 100, 40.0f + i);
+            conciertos.add(concierto);
+        }
+
+        // Crear 7 ejemplos de festivales que contienen conciertos
+        ArrayList<Festival> festivales = new ArrayList<>();
+        for (int i = 1; i <= 7; i++) {
+            ArrayList<Concierto> conciertosFestival = new ArrayList<>();
+            for (int j = i; j < i + 3; j++) {
+                conciertosFestival.add(conciertos.get(j - 1));
+            }
+            Festival festival = crearFestival("Festival " + i, 80.0f + i * 10, Genero.values(), conciertosFestival);
+            festivales.add(festival);
+        }
+
+        // Mostrar la información de los festivales y conciertos
+        for (Festival festival : festivales) {
+            System.out.println(festival);
+        }
+    }
+
+    private static Concierto crearConcierto(String nombre, Genero genero, int aforo, float precio) {
+        int id = ThreadLocalRandom.current().nextInt(1, 1000);
+        Date fecha = generarFechaAleatoria();
+        String artista = "Artista " + id;
+        String descripcion = "Descripción " + id;
+
+        return new Concierto(id, nombre, genero, fecha, artista, descripcion, precio, aforo);
+    }
+
+    private static Festival crearFestival(String nombre, float precio, Genero[] generos, ArrayList<Concierto> conciertos) {
+        int id = ThreadLocalRandom.current().nextInt(1, 1000);
+        Date fechaInicio = generarFechaAleatoria();
+        Date fechaFin = generarFechaAleatoriaDespuesDe(fechaInicio);
+        String descripcion = "Descripción " + id;
+
+        List<Genero> generosFestival = new ArrayList<>();
+        for (Genero genero : generos) {
+            generosFestival.add(genero);
+        }
+
+        return new Festival(id, nombre, fechaInicio, fechaFin, generosFestival, conciertos, descripcion, precio);
+    }
+
+    private static Date generarFechaAleatoria() {
+        long minDay = new Date().getTime();
+        long maxDay = new Date().getTime() + (365 * 24 * 60 * 60 * 1000L); // Un año en milisegundos
+        long randomDay = ThreadLocalRandom.current().nextLong(minDay, maxDay);
+        return new Date(randomDay);
+    }
+
+    private static Date generarFechaAleatoriaDespuesDe(Date fecha) {
+        long minDay = fecha.getTime();
+        long maxDay = fecha.getTime() + (365 * 24 * 60 * 60 * 1000L); // Un año en milisegundos
+        long randomDay = ThreadLocalRandom.current().nextLong(minDay, maxDay);
+        return new Date(randomDay);
+    }
+}
+Ahora, puedes crear una clase Ejemplo para llamar a la clase EjemplosConciertosYFestivales. Por ejemplo:
+
+java
+Copy code
+public class Ejemplo {
+    public static void main(String[] args) {
+        EjemplosConciertosYFestivales.main(args);
+    }
+}
+Al ejecutar la clase Ejemplo, se ejecutarán los ejemplos de creación de conciertos y festivales definidos en EjemplosConciertosYFestivales. Asegúrate de tener ambas clases en tu proyecto Java para que esto funcione correctamente.
+
+
+
+
+User
+haz que algunos de los conciertos generados entren dentro de la lista de conciertos que tienen los festivales
+ChatGPT
+Claro, puedes ajustar la creación de festivales para que algunos de los conciertos generados se agreguen a la lista de conciertos de los festivales. Aquí tienes la modificación en la clase EjemplosConciertosYFestivales para lograr esto:
+
+java
+Copy code
+import java.util.Date;
+import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.List;
+
+public class EjemplosConciertosYFestivales {
+
+    public static void main(String[] args) {
+        // Crear 10 ejemplos de conciertos
+        ArrayList<Concierto> conciertos = new ArrayList<>();
+        for (int i = 1; i <= 10; i++) {
+            Concierto concierto = crearConcierto("Concierto " + i, Genero.values()[i - 1], 1000 + i * 100, 40.0f + i);
+            conciertos.add(concierto);
+        }
+
+        // Crear 7 ejemplos de festivales que contienen conciertos
+        ArrayList<Festival> festivales = new ArrayList<>();
+        for (int i = 1; i <= 7; i++) {
+            ArrayList<Concierto> conciertosFestival = new ArrayList<>();
+            for (int j = i; j < i + 3; j++) {
+                conciertosFestival.add(conciertos.get(j - 1)); // Agregar algunos conciertos a la lista de conciertos del festival
+            }
+            Festival festival = crearFestival("Festival " + i, 80.0f + i * 10, Genero.values(), conciertosFestival);
+            festivales.add(festival);
+        }
+
+        // Mostrar la información de los festivales y conciertos
+        for (Festival festival : festivales) {
+            System.out.println(festival);
+        }
+    }
+
+    private static Concierto crearConcierto(String nombre, Genero genero, int aforo, float precio) {
+        int id = ThreadLocalRandom.current().nextInt(1, 1000);
+        Date fecha = generarFechaAleatoria();
+        String artista = "Artista " + id;
+        String descripcion = "Descripción " + id;
+
+        return new Concierto(id, nombre, genero, fecha, artista, descripcion, precio, aforo);
+    }
+
+    private static Festival crearFestival(String nombre, float precio, Genero[] generos, ArrayList<Concierto> conciertos) {
+        int id = ThreadLocalRandom.current().nextInt(1, 1000);
+        Date fechaInicio = generarFechaAleatoria();
+        Date fechaFin = generarFechaAleatoriaDespuesDe(fechaInicio);
+        String descripcion = "Descripción " + id;
+
+        List<Genero> generosFestival = new ArrayList<>();
+        for (Genero genero : generos) {
+            generosFestival.add(genero);
+        }
+
+        return new Festival(id, nombre, fechaInicio, fechaFin, generosFestival, conciertos, descripcion, precio);
+    }
+
+    private static Date generarFechaAleatoria() {
+        long minDay = new Date().getTime();
+        long maxDay = new Date().getTime() + (365 * 24 * 60 * 60 * 1000L); // Un año en milisegundos
+        long randomDay = ThreadLocalRandom.current().nextLong(minDay, maxDay);
+        return new Date(randomDay);
+    }
+
+    private static Date generarFechaAleatoriaDespuesDe(Date fecha) {
+        long minDay = fecha.getTime();
+        long maxDay = fecha.getTime() + (365 * 24 * 60 * 60 * 1000L); // Un año en milisegundos
+        long randomDay = ThreadLocalRandom.current().nextLong(minDay, maxDay);
+        return new Date(randomDay);
+    }
+}
+En este código, se agregan los primeros tres conciertos generados a la lista de conciertos de cada festival. Puedes ajustar el número de conciertos y festivales y cómo se asignan los conciertos a los festivales según tus necesidades.
